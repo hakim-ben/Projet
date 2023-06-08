@@ -1,1 +1,13 @@
-/.metadata/
+# Dossiers
+.metadata/
+bin/
+target/
+
+# Fichiers
+.DS_Store
+*.class
+*.war
+*.ear
+*.iml
+*.log
+*.swp
