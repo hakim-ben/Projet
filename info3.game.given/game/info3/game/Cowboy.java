@@ -29,6 +29,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import info3.game.graphics.GameCanvas;
+import info3.game.graphics.GameCanvasListener;
 
 /**
  * A simple class that holds the images of a sprite for an animated cowbow.
@@ -41,11 +42,20 @@ public class Cowboy {
   long m_moveElapsed;
   int m_x=10, m_y=10;
   int m_width;
+  boolean jumping;
+  
+  Parameters params;
   // Added by ME :
-  private JFrame m_frame;
-  Cowboy() throws IOException {
+  Cowboy(int mode) throws IOException {
+	if (mode==0) {
+		this.params = new Cowboy1();
+	}
+	else if (mode==1) {
+		this.params = new Cowboy2();
+	}
+	this.m_x = this.params.getCenterX();
+	this.m_y = this.params.getCenterY();
     m_images = loadSprite("resources/winchester-4x6.png", 4, 6);
-    //this.m_frame = m_frame;
   }
   
   /*
@@ -67,7 +77,7 @@ public class Cowboy {
   public void paint(Graphics g, int width, int height) {
     m_width = width;
     BufferedImage img = m_images[m_imageIndex];
-    int scale = 2;
+    int scale = this.params.SCALE;
     g.drawImage(img, m_x, m_y, scale * img.getWidth(), scale * img.getHeight(), null);
   }
 
@@ -93,26 +103,33 @@ public class Cowboy {
   }
   // Function added by ali
   void move(int dir) {
+	  BufferedImage img = m_images[m_imageIndex];
 	  switch (dir) {
 	case 0:
 		if (this.m_x>0)
 			this.m_x -= 1;
 		break;
 	case 1:
-		if (this.m_y>0)
+		if (this.m_y>this.params.getMinHeight())
 			this.m_y -= 1;
+		if (!jumping) this.jumping = true;
+		//this.jump();
 		break;
 	case 2:
-		//if (this.m_x < this.m_frame.getWidth()-10)
-		this.m_x += 1;
+		if (this.m_x < this.params.getWidth()-(img.getWidth()*this.params.SCALE))
+			this.m_x += 1;
 		break;
 	case 3:
-		//if (this.m_y < this.m_frame.getHeight()-10)
-		this.m_y += 1;
+		if (this.m_y < this.params.getMaxHeight()-(img.getHeight()*this.params.SCALE))
+			this.m_y += 1;
 		break;
 	default:
 		break;
 	}
+  }
+  
+  void jump() {
+	  return;
   }
 
 }

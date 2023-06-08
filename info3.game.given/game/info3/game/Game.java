@@ -71,8 +71,8 @@ public class Game {
 
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
-		m_cowboy = new Cowboy();
-		m_cowboy2 = new Cowboy();
+		m_cowboy = new Cowboy(0);
+		m_cowboy2 = new Cowboy(1);
 		
 		System.out.println("  - setting up the frame...");
 		setupFrame();
@@ -169,6 +169,8 @@ public class Game {
 		// erase background
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, width, height);
+		g.setColor(Color.white);
+		g.drawLine(0, Parameters.BORDER_Y, Parameters.TOTAL_WIDTH, Parameters.BORDER_Y);
 
 		// paint
 		m_cowboy.paint(g, width, height);
