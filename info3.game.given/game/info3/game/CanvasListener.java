@@ -162,10 +162,10 @@ public class CanvasListener implements GameCanvasListener {
 		case KeyEvent.VK_DOWN:
 			this.m_game.m_cowboy.move(3);
 			break;
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_Q:
 			this.m_game.m_cowboy2.move(0);
 			break;
-		case KeyEvent.VK_W:
+		case KeyEvent.VK_Z:
 			this.m_game.m_cowboy2.move(1);
 			break;
 		case KeyEvent.VK_D:

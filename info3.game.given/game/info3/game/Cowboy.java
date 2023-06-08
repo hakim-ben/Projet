@@ -39,7 +39,7 @@ public class Cowboy {
   int m_imageIndex;
   long m_imageElapsed;
   long m_moveElapsed;
-  int m_x=10, m_y=10;
+  int m_x=350, m_y=200;
   int m_width;
   // Added by ME :
   private JFrame m_frame;
@@ -55,7 +55,7 @@ public class Cowboy {
     m_imageElapsed += elapsed;
     if (m_imageElapsed > 200) {
       m_imageElapsed = 0;
-      m_imageIndex = (m_imageIndex + 1) % m_images.length;
+     // m_imageIndex = (m_imageIndex + 1) % m_images.length;
     }
     m_moveElapsed += elapsed;
 //    if (m_moveElapsed>24 & m_width!=0) {
@@ -94,25 +94,90 @@ public class Cowboy {
   // Function added by ali
   void move(int dir) {
 	  switch (dir) {
-	case 0:
-		if (this.m_x>0)
+	case 0://back
+		if(!this.colision_face(dir)){
+		if (this.m_x>0) {
 			this.m_x -= 1;
+			m_imageIndex = (1*6)+((m_imageIndex+1) % 6);
+			
+		}}
+		vide(dir);
+		
 		break;
-	case 1:
-		if (this.m_y>0)
+	case 1: //jump
+		if(!this.colision_saut()){
+		if (this.m_y>0) {
 			this.m_y -= 1;
+			
+		}}
 		break;
-	case 2:
+	case 2: //forward
 		//if (this.m_x < this.m_frame.getWidth()-10)
+		if(!this.colision_face(dir)){
 		this.m_x += 1;
+		m_imageIndex = (3*6)+((m_imageIndex+1) % 6);
+		}
+		vide(dir);
 		break;
-	case 3:
+	case 3: //croach
 		//if (this.m_y < this.m_frame.getHeight()-10)
-		this.m_y += 1;
+		m_imageIndex = (0*6)+((m_imageIndex+1) % 2);
 		break;
 	default:
 		break;
 	}
   }
+  
+  boolean colision_face(int dir) {
+	 int co_x = 600;
+	  int co_y = 184;//on aura une fonction qui detectera les entité et nous donnera sa coordonée
+	  
+	
+	  
+	  
+	  if(dir == 2) {//on avance
+		  if((m_x == co_x - 80) && (m_y >= co_y -80)) {
+			  return true;
+	  }
+	  }
+	  
+	  if(dir == 0) {//on recule
+		  if((m_x == co_x + 80) && (m_y >= co_y -80)) {
+			  return true;
+	  }
+	  }
+	  if(dir == 1) {//on saute
+		  if(((m_x == co_x + 20 )||(m_x == co_x - 20 )) && (m_y >= co_y -80)) {
+			  return true;
+	  }
+	  }
+	  return false;
+  } 
+  
+  boolean colision_saut() {
+	  int co_x=200;
+	  int co_y=150;
+	  
+	  if((((m_x <= co_x + 20)|| (m_x <= co_x-20)) && ((m_y - co_y) <= 20))) {
+		  return true;
+		  
+	  }
+	 return false;
+	  
+  }
+  
+  void vide(int dir) {
+	  int co_x = 700;//une fonction qui detecte si on est sur du vide, nous renvoie la coordonée
+	  int co_y = 284;
+	 
+		  if((m_x == co_x - 50) && (m_y <= co_y )) {
+			  m_y = 500;
+			  
+			  
+	  }
+	  }
+	 
+  } 
+  
 
-}
+

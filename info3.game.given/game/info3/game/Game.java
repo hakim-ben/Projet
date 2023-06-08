@@ -47,6 +47,7 @@ public class Game {
 	}
 
 	JFrame m_frame;
+	JFrame m_frame2;
 	JLabel m_text;
 	GameCanvas m_canvas;
 	CanvasListener m_listener;
@@ -66,8 +67,11 @@ public class Game {
 		
 
 		System.out.println("  - creating frame...");
-		Dimension d = new Dimension(1024, 768);
+		Dimension d = new Dimension(1024, 384);
+		Dimension dsol = new Dimension(1024, 10);
+		
 		m_frame = m_canvas.createFrame(d);
+		
 
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
@@ -76,6 +80,7 @@ public class Game {
 		
 		System.out.println("  - setting up the frame...");
 		setupFrame();
+		
 	}
 
 	/*
@@ -85,19 +90,26 @@ public class Game {
 	private void setupFrame() {
 
 		m_frame.setTitle("Game");
+		
 		m_frame.setLayout(new BorderLayout());
+	
 
 		m_frame.add(m_canvas, BorderLayout.CENTER);
+		
 
 		m_text = new JLabel();
 		m_text.setText("Tick: 0ms FPS=0");
+		
 		m_frame.add(m_text, BorderLayout.NORTH);
+		
 
 		// center the window on the screen
 		m_frame.setLocationRelativeTo(null);
+		
 
 		// make the vindow visible
 		m_frame.setVisible(true);
+	
 	}
 
 	/*
@@ -167,8 +179,21 @@ public class Game {
 		int height = m_canvas.getHeight();
 
 		// erase background
-		g.setColor(Color.gray);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
+		
+		g.setColor(Color.blue);
+		g.fillRect(0, 284, 1024, 100);
+		
+		g.setColor(Color.pink);
+		g.drawRect(600, 184, 50, 100);
+		
+		g.setColor(Color.yellow);
+		g.drawOval(200, 150, 50, 50);
+		
+		g.setColor(Color.black);
+		g.fillRect(700, 284, 50, 50);
+		
 
 		// paint
 		m_cowboy.paint(g, width, height);
