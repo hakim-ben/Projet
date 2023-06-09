@@ -53,6 +53,8 @@ public class Game {
 	Cowboy m_cowboy;
 	Cowboy m_cowboy2;
 	Sound m_music;
+	Salle m_salle;
+	Salle m_salle2;
 
 	Game() throws Exception {
 
@@ -73,6 +75,8 @@ public class Game {
 		// in an Model-View-Controller pattern (MVC)
 		m_cowboy = new Cowboy(0);
 		m_cowboy2 = new Cowboy(1);
+		m_salle = new Salle(0);
+		m_salle2 = new Salle(1);
 		
 		System.out.println("  - setting up the frame...");
 		setupFrame();
@@ -173,6 +177,7 @@ public class Game {
 		g.drawLine(0, Parameters.BORDER_Y, Parameters.TOTAL_WIDTH, Parameters.BORDER_Y);
 
 		// paint
+		m_salle.paint(g);
 		m_cowboy.paint(g, width, height);
 		m_cowboy2.paint(g, width, height);
 	}

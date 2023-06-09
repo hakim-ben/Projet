@@ -24,55 +24,47 @@ public abstract class Parameters {
 
 }
 
-class Cowboy1 extends Parameters {
+class Screen1 extends Parameters {
 	public static int MIN_HEIGHT = 0;
 	public static int MAX_HEIGHT = BORDER_Y;
 	public static int CENTER_X = TOTAL_WIDTH/2;
 	public static int CENTER_Y = MIN_HEIGHT+(MAX_HEIGHT-MIN_HEIGHT)/2;
 	@Override
 	int getMaxHeight() {
-		// TODO Auto-generated method stub
 		return MAX_HEIGHT;
 	}
 	@Override
 	int getMinHeight() {
-		// TODO Auto-generated method stub
 		return MIN_HEIGHT;
 	}
 	@Override
 	int getCenterX() {
-		// TODO Auto-generated method stub
 		return CENTER_X;
 	}
 	@Override
 	int getCenterY() {
-		// TODO Auto-generated method stub
 		return CENTER_Y;
 	}
 }
-class Cowboy2 extends Parameters {
+class Screen2 extends Parameters {
 	public static int MIN_HEIGHT = BORDER_Y;
 	public static int MAX_HEIGHT = TOTAL_HEIGHT;
 	public static int CENTER_X = TOTAL_WIDTH/2;
 	public static int CENTER_Y = MIN_HEIGHT+(MAX_HEIGHT-MIN_HEIGHT)/2;
 	@Override
 	int getMaxHeight() {
-		// TODO Auto-generated method stub
 		return MAX_HEIGHT;
 	}
 	@Override
 	int getMinHeight() {
-		// TODO Auto-generated method stub
 		return MIN_HEIGHT;
 	}
 	@Override
 	int getCenterX() {
-		// TODO Auto-generated method stub
 		return CENTER_X;
 	}
 	@Override
 	int getCenterY() {
-		// TODO Auto-generated method stub
 		return CENTER_Y;
 	}
 }

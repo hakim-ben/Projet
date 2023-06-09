@@ -24,17 +24,21 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import info3.game.graphics.GameCanvasListener;
 
 public class CanvasListener implements GameCanvasListener {
   Game m_game;
   ArrayList<Integer> pressedKeys;
+  HashMap<Integer,Integer> 	timedKeys;
 
   CanvasListener(Game game) {
     m_game = game;
     this.pressedKeys = new ArrayList<Integer>();
+    this.timedKeys = new HashMap<Integer, Integer>();
   }
 
   @Override
@@ -94,11 +98,19 @@ public class CanvasListener implements GameCanvasListener {
   @Override
   public void keyPressed(KeyEvent e) {
     System.out.println("Key pressed: "+e.getKeyChar()+" code="+e.getKeyCode());
-    if (!this.pressedKeys.contains(e.getKeyCode()))
-    	this.pressedKeys.add(e.getKeyCode());    Iterator<Integer> itr = this.pressedKeys.iterator();
-        while (itr.hasNext()) {
-        	this.keyAction(itr.next());
-        }
+    switch (e.getKeyCode()) {
+	case KeyEvent.VK_SPACE:
+		if (!this.timedKeys.containsKey(e.getKeyCode()))
+			this.timedKeys.put(KeyEvent.VK_SPACE,100);
+		break;
+	default:
+		if (!this.pressedKeys.contains(e.getKeyCode()))
+			this.pressedKeys.add(e.getKeyCode());    Iterator<Integer> itr = this.pressedKeys.iterator();
+			while (itr.hasNext()) {
+				this.keyAction(itr.next());
+			}
+		break;
+	}
   }
 
   @Override
@@ -114,6 +126,19 @@ public class CanvasListener implements GameCanvasListener {
     Iterator<Integer> itr = this.pressedKeys.iterator();
     while (itr.hasNext()) {
     	this.keyAction(itr.next());
+    }
+    
+    // Iterating HashMap through for loop
+    for (Map.Entry<Integer, Integer> set :
+         this.timedKeys.entrySet()) {
+
+        if (set.getValue()==0) {
+        	this.timedKeys.remove(set.getKey());
+        }
+        else {
+        	this.timedKeys.replace(set.getKey(), set.getValue(), set.getValue()-1);
+        	this.keyAction(set.getKey());
+        }
     }
   }
 
@@ -174,9 +199,15 @@ public class CanvasListener implements GameCanvasListener {
 		case KeyEvent.VK_S:
 			this.m_game.m_cowboy2.move(3);
 			break;
+		case KeyEvent.VK_SPACE:
+			if (!this.m_game.m_cowboy.isJumping()) {
+				this.m_game.m_cowboy.jump();
+			}
+			break;
 		default:
 			break;
 		}
   }
+  
 
 }

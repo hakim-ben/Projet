@@ -43,15 +43,16 @@ public class Cowboy {
   int m_x=10, m_y=10;
   int m_width;
   boolean jumping;
+  Jump jump;
   
   Parameters params;
   // Added by ME :
   Cowboy(int mode) throws IOException {
 	if (mode==0) {
-		this.params = new Cowboy1();
+		this.params = new Screen1();
 	}
 	else if (mode==1) {
-		this.params = new Cowboy2();
+		this.params = new Screen2();
 	}
 	this.m_x = this.params.getCenterX();
 	this.m_y = this.params.getCenterY();
@@ -127,9 +128,39 @@ public class Cowboy {
 		break;
 	}
   }
+  void setJump() {this.jumping = true;}
+  
+  void stopJump() {this.jumping = false;}
+  
+  boolean isJumping() { return this.jumping;}
   
   void jump() {
-	  return;
+	  if (!this.jumping) {
+		  this.jump = null;		  
+		  return;
+	  }
+	  if (this.jump==null) {
+		  this.jump = new Jump(this.m_y);
+	  }
+	  this.m_y = this.jump.jump(m_y);
   }
 
+}
+
+class Jump {
+	private static int initialjumpStrength = 24;
+	private static int weight = 5;
+	private int jumpStrength;
+	int hauteurSol ;
+	public Jump (int hauteurSol) {
+		this.jumpStrength = initialjumpStrength;
+		this.hauteurSol = hauteurSol;
+	}
+	
+	int jump(int y) {
+		int new_y = y -jumpStrength;
+		jumpStrength-= weight;
+		if (new_y < this.hauteurSol) return this.hauteurSol;
+		return new_y;
+	}
 }
