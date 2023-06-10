@@ -25,176 +25,194 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import info3.game.graphics.GameCanvasListener;
 
 public class CanvasListener implements GameCanvasListener {
-	Game m_game;
-	ArrayList<Integer> pressedKeys;
-	boolean up = false;
-	boolean right = false;
-	boolean left = false;
-	
-	public static final int JUMP_RIGHT = 1;
-	public static final int JUMP_LEFT = 2;
-	
+  Game m_game;
+  ArrayList<Integer> pressedKeys;
 
-	CanvasListener(Game game) {
-		m_game = game;
-		this.pressedKeys = new ArrayList<Integer>();
-	}
+  CanvasListener(Game game) {
+    m_game = game;
+    pressedKeys = new ArrayList<Integer>();
+  }
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("Mouse clicked: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    System.out.println("Mouse clicked: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		System.out.println("Mouse pressed: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mousePressed(MouseEvent e) {
+    System.out.println("Mouse pressed: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		System.out.println("Mouse released: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseReleased(MouseEvent e) {
+    System.out.println("Mouse released: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		System.out.println("Mouse entered: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseEntered(MouseEvent e) {
+    System.out.println("Mouse entered: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		System.out.println("Mouse exited: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseExited(MouseEvent e) {
+    System.out.println("Mouse exited: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		System.out.println("Mouse dragged: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseDragged(MouseEvent e) {
+    System.out.println("Mouse dragged: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		System.out.println("Mouse moved: (" + e.getX() + "," + e.getY() + ")");
-		System.out.println("   modifiers=" + e.getModifiersEx());
-		System.out.println("   buttons=" + e.getButton());
-	}
+  @Override
+  public void mouseMoved(MouseEvent e) {
+    System.out.println("Mouse moved: ("+e.getX()+","+e.getY()+")");
+    System.out.println("   modifiers="+e.getModifiersEx());
+    System.out.println("   buttons="+e.getButton());
+  }
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		System.out.println("Key typed: " + e.getKeyChar() + " code=" + e.getKeyCode());
-	}
+  @Override
+  public void keyTyped(KeyEvent e) {
+    System.out.println("Key typed: "+e.getKeyChar()+" code="+e.getKeyCode());
+  }
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("Key pressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
-		if (!this.pressedKeys.contains(e.getKeyCode())) {
-			this.pressedKeys.add(e.getKeyCode());
-		}
-		int key = e.getKeyCode();
-		Iterator<Integer> itr = this.pressedKeys.iterator();
-		int event;
+//  public void addKeyList(int code) {
+//	  if (!this.pressedKeys.contains(code))
+//	    	this.pressedKeys.add(code);    
+//	  		Iterator<Integer> itr = this.pressedKeys.iterator();
+//	        while (itr.hasNext()) {
+//	        	this.keyAction(itr.next());
+//	        }
+//  }
+  
+  
+//  private void keyAction() {
+//	  // On va itérer sur la liste
+//	  
+//	  // Cas 1 : la liste est vide
+//	  
+//	  int size = this.pressedKeys.size();
+//	  if (size == 0) return;
+//	  
+//	  
+//	  Iterator<Integer> itr = this.pressedKeys.iterator();
+//	  
+//	  switch(itr.next()) {
+//	    case KeyEvent.VK_UP:
+//	    	m_game.m_cowboy.jump_up_vertical('v');
+//	    	break;
+//	    case KeyEvent.VK_DOWN:
+//	    	m_game.m_cowboy.move_down();
+//	    	break;
+//	    case KeyEvent.VK_LEFT:
+//	    	m_game.m_cowboy.move_left();
+//	    	break;
+//	    case KeyEvent.VK_RIGHT:
+//	    	m_game.m_cowboy.move_right();
+//	    	break;
+//	    default:
+//	    	break;
+//	    }
+//	  
+////	  if (itr.hasNext()) {
+////		  
+////		  switch(itr.next()) {
+////		  	
+////		  }
+////	  }
+//	  
+//	  
+//	  // Cas 2 : la liste a un élément
+//	  
+//	  // Cas 3 : la liste a deux éléments
+//	 
+//}
+  
+  @Override
+  public void keyPressed(KeyEvent e) {
+    System.out.println("Key pressed: "+e.getKeyChar()+" code="+e.getKeyCode());
+    int code = e.getKeyCode();
+//    addKeyList(e.getKeyCode());
+//    keyAction();
+//    
+//    
 
-		left = false;
-		right = false;
-		up = false;
-		while (itr.hasNext()) {
-			event = itr.next();
-			if (event == KeyEvent.VK_UP) {
-				up = true;
-			}
-			if (event == KeyEvent.VK_LEFT) {
-				left = true;
-			}
-			if (event == KeyEvent.VK_RIGHT) {
-				right = true;
-			}
-			if (right && up) {
-				key = JUMP_RIGHT;
-			}
-			if (left && up) {
-				key = JUMP_LEFT;
-			}
-		}
-		
-		switch (key) {
-		case JUMP_RIGHT :
-			m_game.m_cowboy.jump_up(1);
-			break;
-		case JUMP_LEFT :
-			m_game.m_cowboy.jump_up(2);
-			break;
-		case KeyEvent.VK_DOWN:
-			m_game.m_cowboy.move_down();
-			break;
-		case KeyEvent.VK_UP:
-//    		m_game.m_cowboy.move_up();
-			m_game.m_cowboy.jump_up(0);
-			break;
-		case KeyEvent.VK_LEFT:
-			m_game.m_cowboy.move_left();
-			break;
-		case KeyEvent.VK_RIGHT:
-			m_game.m_cowboy.move_right();
-			break;
-		}
-	}
+    switch(code) {
+    case KeyEvent.VK_UP:
+    	m_game.m_cowboy.jump_up_vertical('r');
+    	break;
+    case KeyEvent.VK_DOWN:
+    	m_game.m_cowboy.move_down();
+    	break;
+    case KeyEvent.VK_LEFT:
+    	m_game.m_cowboy.move_left();
+    	break;
+    case KeyEvent.VK_RIGHT:
+    	m_game.m_cowboy.move_right();
+    	break;
+    default:
+    	break;
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		System.out.println("Key released: " + e.getKeyChar() + " code=" + e.getKeyCode());
-		if (this.pressedKeys.contains(e.getKeyCode())) {
-	    	this.pressedKeys.remove(Integer.valueOf(e.getKeyCode()));
-		}
-	}
+  }
 
-	@Override
-	public void tick(long elapsed) {
-		m_game.tick(elapsed);
-	}
+  @Override
+  public void keyReleased(KeyEvent e) {
+    System.out.println("Key released: "+e.getKeyChar()+" code="+e.getKeyCode());
+    
+  }
+  
 
-	@Override
-	public void paint(Graphics g) {
-		m_game.paint(g);
-	}
+  @Override
+  public void tick(long elapsed) {
+    m_game.tick(elapsed);
+  }
 
-	@Override
-	public void windowOpened() {
-		m_game.loadMusic();
+  @Override
+  public void paint(Graphics g) {
+    m_game.paint(g);
+  }
+
+  @Override
+  public void windowOpened() {
+    m_game.loadMusic();
 //    m_game.m_canvas.setTimer(6000);
-	}
+  }
 
-	@Override
-	public void exit() {
-	}
+  @Override
+  public void exit() {
+  }
 
 //  boolean m_expired;
-	@Override
-	public void endOfPlay(String name) {
+  @Override
+  public void endOfPlay(String name) {
 //    if (!m_expired) // only reload if it was a forced reload by timer
-		m_game.loadMusic();
+      m_game.loadMusic();
 //    m_expired = false;
-	}
+  }
 
-	@Override
-	public void expired() {
-		// will force a change of music, after 6s of play
+  @Override
+  public void expired() { 
+    // will force a change of music, after 6s of play
 //    System.out.println("Forcing an ealy change of music");
 //    m_expired = true;
 //    m_game.loadMusic();    
-	}
+  }
 
 }

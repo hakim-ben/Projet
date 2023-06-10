@@ -24,6 +24,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.RandomAccessFile;
 
 import javax.swing.JFrame;
@@ -52,11 +53,21 @@ public class Game {
 	CanvasListener m_listener;
 	Cowboy m_cowboy;
 	Sound m_music;
+	
+	Player m_joueur1;
+	Player m_joueur2;
 
 	Game() throws Exception {
 		// creating a cowboy, that would be a model
 		// in an Model-View-Controller pattern (MVC)
+		int x = 0, y = 0;
+		//BufferedImage[] m_images;
 		m_cowboy = new Cowboy();
+		m_joueur1 = new Player(x,y);
+		m_joueur2 = new Player(x,y);
+		
+		Entity user = new Player(x,y);
+		
 		// creating a listener for all the events
 		// from the game canvas, that would be
 		// the controller in the MVC pattern
